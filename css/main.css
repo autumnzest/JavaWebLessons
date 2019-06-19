@@ -1,0 +1,22 @@
+@charset "UTF-8";
+.header {
+  padding: 30px;
+  text-align: center;
+  background: white;
+  font-size:  36px;
+}
+.rowright {
+	float:right;
+	padding: 5px;
+}
+.table{
+	position:absolute;
+	left:45%;
+}
+
+hr{
+	width:400px;
+}
+.select_option{
+	width:172px;
+}
