@@ -1,0 +1,96 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>test</title>
+<script src="js/jquery.min.js">
+	
+</script>
+<script>
+	function submit() {
+
+		if($('#username').val() == ""){
+			alert("username is empty!");
+			return;
+		}
+		if($('#password').val() == ""){
+			alert("password is empty!");
+			return;
+		}
+		if($('#password').val().length > 10 || $('#password').val().length < 4){
+			alert("password's size is between 4 and 10!");
+			return;
+		}
+		if($('#password').val() != $('#pwconfirm').val()){
+			alert("password is not same!");
+			return;
+		}
+		
+		$.post("/Test2/UserAdd", {
+			username : $('#username').val(),
+			password : $('#password').val(),
+			sex : $('input[type=radio]:checked').val(),
+			age : $('#age').val(),
+			country : $('select').val(),
+			memo : $('textarea').val()
+		}, function(data, status) {
+			if (data != null && data == "true") {
+				alert("sign up is successed!");
+				$(location).attr('href', '/Test2/UserList');
+			} else {
+				alert("sign up is failed!");
+			}
+		});
+
+	}
+	function login() {
+		$(location).attr('href', '/Test2/login.jsp');
+	}
+</script>
+<link rel="stylesheet" href="css/main.css" />
+</head>
+<body>
+	<div class="header">register</div>
+	<hr>
+	<table class="table">
+		<tr>
+			<td class="rowright">username:</td>
+			<td><input type="text" id="username">*</td>
+		</tr>
+		<tr>
+			<td class="rowright">password:</td>
+			<td><input type="password" id="password">*</td>
+		</tr>
+		<tr>
+			<td class="rowright">confirm:</td>
+			<td><input type="password" id="pwconfirm">*</td>
+		</tr>
+		<tr>
+			<td class="rowright">sex:</td>
+			<td><input type="radio" name="sex" value="Male">Male <input
+				type="radio" name="sex" value="Female">Female</td>
+		</tr>
+		<tr>
+			<td class="rowright">age:</td>
+			<td><input type="text" id="age"></td>
+		</tr>
+		<tr>
+			<td class="rowright">country:</td>
+			<td><select class="select_option">
+					<option value="China">China</option>
+					<option value="Japan">Japan</option>
+					<option value="America">America</option>
+					<option value="Africa">Africa</option>
+			</select></td>
+		</tr>
+		<tr>
+			<td class="rowright">memo:</td>
+			<td><textarea rows="10" cols="22">this is a memo.</textarea></td>
+		</tr>
+		<tr>
+			<td class="rowright">
+				<button onclick="submit()">submit</button>
+			</td>
+			<td><button onclick="login()">login</button></td>
+		</tr>
+	</table>
+</body>
+</html>
